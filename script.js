@@ -1,5 +1,4 @@
 const startButton = document.querySelector(".startButton")
-const body = document.querySelector("body")
 const start = document.querySelector(".start")
 const howToPlay = document.querySelector(".howToPlay")
 const startGameButton = document.querySelector(".startGame")
@@ -18,7 +17,6 @@ const more = document.querySelector(".More");
 const restart = document.querySelector(".restart");
 
 let border
-
 let scoreinterval
 
 let startGame = false;
@@ -36,8 +34,8 @@ var objects = [ {name: "blue",image: "./img/blue1.png"},
 
 startButton.addEventListener("click", () => {
     start.classList.add("hide")
-    howToPlay.classList.remove("hide")
-    body.style.backgroundColor = "#E7F7F5"
+    began()
+    //howToPlay.classList.remove("hide")
 })
 
 startGameButton.addEventListener("click", () => {
@@ -61,7 +59,6 @@ restart.addEventListener("click", () => {
 
 function began(){
     game.classList.remove("hide")
-    body.style.backgroundColor = ""
     startGame = true
     score = 0
     scoreinterval =  setInterval(updateScore, 1)

@@ -38,10 +38,10 @@ startButton.addEventListener("click", () => {
     //howToPlay.classList.remove("hide")
 })
 
-startGameButton.addEventListener("click", () => {
+/*startGameButton.addEventListener("click", () => {
     howToPlay.classList.add("hide")
     began()
-})
+})*/
 
 next.addEventListener("click", () => {
     popUp.classList.add("hide")

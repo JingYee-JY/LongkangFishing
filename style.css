@@ -328,6 +328,7 @@ hr{
     justify-content: center;
     flex-direction: column;
     place-items: center;
+    background-color: #98D5B3;
     justify-content: center;
     gap: 5vh;
     width: 100%;

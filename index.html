@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lokang Fishing</title>
+    <link rel="stylesheet" 
+    href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="start">
+        <div class="game-title">
+            <img class="title" src="./img/title.png">
+        </div>
+        <img class="preview" src="./img/preview.png">
+        <button class="startButton">
+            <p class="words"><img src="./img/arrow.png" class="arrowHead"> START GAME</p>
+        </button>
+    </div>
+    <div class="howToPlay hide">
+        <h1>HOW TO PLAY<hr></h1>
+            <div class="instruction">
+            <p>Sustainable and non-sustainable materials  falls from the sky.</p>
+            <p>Catch all the Sustainable materials and don't let them fall to ground.</p>
+            <p>Be careful not to catch non-sustainable materials. Let non-sustainable materials fall to ground.</p>   
+            <div class="example">
+                        <div class="object">
+                            <img src="./img/wood.png">
+                            <img class="small" src="./img/tick.png">
+                        </div>
+                        <div class="object">
+                            <img src="./img/steel1.png">
+                            <img class="small" src="./img/cross.png">
+                        </div>
+                </div>
+                <div class="help">
+                    <p>Sustainable materials are green mark approved as shown below</p>
+                    <img src="./img/logo.png">
+                </div>
+            </div>
+            <button class="startGame"> 
+                <p class="words"><img src="./img/arrow.png" class="arrowHead"> START GAME</p>
+            </button>
+    </div>
+    <div class="game hide">
+        <div class="top">
+            <div class="goal"></div>
+            <div class="chance">
+                <p>Chance:</p>
+                <img class="net" src="./img/net.png">
+                <img class="net" src="./img/net.png">
+                <img class="net" src="./img/net.png">
+            </div>
+        </div>
+        <div class="game-container">
+            <div class="water"></div>
+            <div class="end-line"></div>
+            <div class="tank">
+                <p class="scoreCount"></p>
+            </div>
+        </div>
+    </div>
+    <div class="popUp hide">
+        <div class="pop">
+            <div class="information"></div>
+            <button class="next">Next</button>
+        </div>
+    </div>
+    <div class="final hide">
+        <div class="final-title">
+            <img class="title-final" src="./img/title.png">
+        </div>
+        <div class="text"></div>
+        <button class="restart">
+                <p class="words">RESTART</p>
+            </button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

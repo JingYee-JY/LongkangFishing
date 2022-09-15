@@ -15,6 +15,9 @@ const finalTitle = document.querySelector(".title-final");
 const text = document.querySelector(".text");
 const more = document.querySelector(".More");
 const restart = document.querySelector(".restart");
+const ready = document.querySelector(".ready");
+const readyButton = document.querySelector(".readyButton");
+const detail = document.querySelector(".detail");
 
 let border
 let scoreinterval
@@ -33,6 +36,12 @@ var objects = [ {name: "blue",image: "./img/blue1.png"},
                 {name: "red",image: "./img/red1.png"}]
 
 startButton.addEventListener("click", () => {
+    start.classList.add("hide")
+    gameDetail()
+    //howToPlay.classList.remove("hide")
+})
+
+readyButton.addEventListener("click", () => {
     start.classList.add("hide")
     began()
     //howToPlay.classList.remove("hide")
@@ -54,14 +63,13 @@ restart.addEventListener("click", () => {
     for(let i = 0; i < 3; i++){
         objects.pop()
     }
+    gameDetail()
     began()
   })
 
-function began(){
+  function gameDetail(){
     game.classList.remove("hide")
-    startGame = true
-    score = 0
-    scoreinterval =  setInterval(updateScore, 1)
+    ready.classList.remove("hide")
     let answerIndex = Math.floor(Math.random() * Math.floor(objects.length))
     answer = objects[answerIndex].name
     newobject =  {name: `${answer}`, image: `${objects[answerIndex].image}`}
@@ -69,16 +77,28 @@ function began(){
         objects.push(newobject)
     }
     chance = 3
+    scoreCount.innerHTML = "0";
     chances.innerHTML = `
     <p>Chance:</p>
     <img class="net" src="./img/net.png">
     <img class="net" src="./img/net.png">
     <img class="net" src="./img/net.png">`
     total = Math.floor(Math.random() * (11 - 5)) + 5
-    goal.innerHTML = `<p>Please Catch!</p>
-    <img src=${objects[answerIndex].image}>
-    <p>${total}</p>`
-    console.log(answer)
+    goal.innerHTML = `<p>Catch</p>
+    <p class="big">${total}</p>
+    <img src=${objects[answerIndex].image}>`
+    detail.innerHTML =`
+        <h1>Catch</h1>
+        <p>${total} ${objects[answerIndex].name} fish</p>
+        <img src="${objects[answerIndex].image}">`
+}
+
+function began(){
+    ready.classList.add("hide")
+    startGame = true
+    score = 0
+    scoreinterval =  setInterval(updateScore, 1)
+    chance = 3
     spawnObject()
     fallingObject()
 }
@@ -113,7 +133,6 @@ function moveObject(){
     let orange = document.querySelectorAll(".orange");
     let green = document.querySelectorAll(".green");
     let red = document.querySelectorAll(".red");
-    let border = gameContainer.getBoundingClientRect();
 
     let spwanTime = border.height / 4
 
@@ -149,7 +168,6 @@ function moveObject(){
                     remove()
                     game.classList.add("hide")
                     final.classList.remove("hide")
-                    finalTitle.src = "./img/title.png"
                     text.innerHTML = `
                     <img src="./img/lose.png">
                     <p>Try Again!</p>`;
@@ -162,31 +180,31 @@ function moveObject(){
                     information.innerHTML =`
                     <h1>Wrong Fish</h1>
                     <img src="${objects[0].image}">
-                    <p>Look closely!</p>`
+                    <p>Look closer!</p>`
                 }
                 if(item.classList.contains("brown")){
                     information.innerHTML =`
                     <h1>Wrong Fish</h1>
                     <img src="${objects[1].image}">
-                    <p>Look closely!</p>`
+                    <p>Look closer!</p>`
                 }
                 if(item.classList.contains("orange")){
                     information.innerHTML =`
                     <h1>Wrong Fish</h1>
                     <img src="${objects[2].image}">
-                    <p>Look closely!</p>`
+                    <p>Look closer!</p>`
                 }
                 if(item.classList.contains("green")){
                     information.innerHTML =`
                     <h1>Wrong Fish</h1>
                     <img src="${objects[3].image}">
-                    <p>Look closely!</p>`
+                    <p>Look closer!</p>`
                 }
                 if(item.classList.contains("red")){
                     information.innerHTML =`
                     <h1>Wrong Fish</h1>
                     <img src="${objects[4].image}">
-                    <p>Look closely!</p>`
+                    <p>Look closer!</p>`
                 }
                 popUp.classList.remove("hide")
                 gameContainer.removeChild(item);
@@ -223,10 +241,9 @@ function updateScore(){
                 remove()
                 game.classList.add("hide")
                 final.classList.remove("hide")
-                finalTitle.src = "./img/title.png"
                 text.innerHTML = `
                 <img src="./img/win.png">
-                <p>Here is your prize!</p>`;
+                <p>Here Your Prize!</p>`;
                 clearInterval(scoreinterval);
               }, 200);
         }

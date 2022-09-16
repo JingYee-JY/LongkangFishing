@@ -25,7 +25,7 @@ body{
     font-family: 'Lilita One', cursive;
 }
 
-.start, .game, .howToPlay, .final, .game-container{
+.start, .game, .howToPlay, .final{
     width: 100%;
     height: 100%;
     display: flex;
@@ -167,7 +167,8 @@ hr{
 .game-container{
     position: absolute;
     width: 100%;
-    align-self: flex-end;
+    display: flex;
+    justify-content: flex-end;
     height: 100%;
     z-index: 1;
 }
@@ -182,7 +183,7 @@ hr{
 
 .tank{
     width: 150px;
-    height: 110px;
+    height: 200px;
     background-image: url("./img/Tank.png");
     z-index: 5;
     background-position:bottom;
@@ -192,7 +193,7 @@ hr{
     display: flex;
     justify-content: center;
     align-items: center;
-    bottom: 5px;
+    bottom: 0;
     left: 0px;
 }
 
@@ -224,9 +225,6 @@ hr{
     align-items: center;
 }
 
-.big{
-    font-size: 30px !important;
-}
 .goal p {
     margin: 0;
 }
@@ -262,7 +260,7 @@ hr{
 }
 
 .scoreCount{
-	color: white;
+    font-size: 30px;
 	align-self: center;
 	margin: 0 !important;
 }
@@ -537,7 +535,7 @@ hr{
     .goal p{
         font-size: 30px;
     }
-    .big{
+    .scoreCount{
         font-size: 40px !important;
     }
     .chance p{

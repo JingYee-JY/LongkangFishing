@@ -4,7 +4,6 @@ const howToPlay = document.querySelector(".howToPlay")
 const startGameButton = document.querySelector(".startGame")
 const game = document.querySelector(".game")
 const gameContainer = document.querySelector(".game-container");
-const scoreCount = document.querySelector(".scoreCount")
 const goal = document.querySelector(".goal")
 const chances = document.querySelector(".chance")
 const popUp = document.querySelector(".popUp");
@@ -19,13 +18,13 @@ const ready = document.querySelector(".ready");
 const readyButton = document.querySelector(".readyButton");
 const detail = document.querySelector(".detail");
 
+let scoreCount
 let border
 let scoreinterval
 
 let startGame = false;
-let player = {step: 1, right:9}
+let player = {step: 1, right:9,}
 let right;
-let score;
 let total;
 let chance;
 
@@ -64,12 +63,12 @@ restart.addEventListener("click", () => {
         objects.pop()
     }
     gameDetail()
-    began()
   })
 
   function gameDetail(){
     game.classList.remove("hide")
     ready.classList.remove("hide")
+    
     let answerIndex = Math.floor(Math.random() * Math.floor(objects.length))
     answer = objects[answerIndex].name
     newobject =  {name: `${answer}`, image: `${objects[answerIndex].image}`}
@@ -77,7 +76,6 @@ restart.addEventListener("click", () => {
         objects.push(newobject)
     }
     chance = 3
-    scoreCount.innerHTML = "0";
     chances.innerHTML = `
     <p>Chance:</p>
     <img class="net" src="./img/net.png">
@@ -85,8 +83,9 @@ restart.addEventListener("click", () => {
     <img class="net" src="./img/net.png">`
     total = Math.floor(Math.random() * (11 - 5)) + 5
     goal.innerHTML = `<p>Catch</p>
-    <p class="big">${total}</p>
+    <p class="scoreCount">${total}</p>
     <img src=${objects[answerIndex].image}>`
+    scoreCount = document.querySelector(".scoreCount")
     detail.innerHTML =`
         <h1>Catch</h1>
         <p>${total} ${objects[answerIndex].name} fish</p>
@@ -96,7 +95,6 @@ restart.addEventListener("click", () => {
 function began(){
     ready.classList.add("hide")
     startGame = true
-    score = 0
     scoreinterval =  setInterval(updateScore, 1)
     chance = 3
     spawnObject()
@@ -142,13 +140,20 @@ function moveObject(){
         }
         if(item.classList.contains("move")){
             if(item.x < 60){
-                item.classList.remove("move")
+                if(item.y > border.height - 200){
+                    item.classList.remove("move")
+                }
+                item.y = item.y + player.right;
+                item.style.top = item.y +"px";
+                return
             }
             if(item.y > border.height - 200){
                 item.classList.remove("move")
             }
             item.x = item.x - player.right;
             item.style.left = item.x +"px";
+            item.y = item.y + player.right;
+            item.style.top = item.y +"px";
         }
         if(item.y > border.height){
             gameContainer.removeChild(item);
@@ -156,7 +161,7 @@ function moveObject(){
         if(item.y > (border.height - 150) && item.y < border.height && 
         item.x > 0 && item.x < 100){
             if(item.classList.contains(`${answer}`)){
-                score += 1
+                total -= 1
                 gameContainer.removeChild(item);
                 return
             }
@@ -232,9 +237,9 @@ function moveObject(){
 
 function updateScore(){
     if(startGame == true){
-        scoreCount.innerHTML = `${score}`;
+        scoreCount.innerHTML = `${total}`;
 
-        if(score == total){
+        if(total == 0){
             console.log("stop")
             let delay = setTimeout(() => {
                 startGame = false

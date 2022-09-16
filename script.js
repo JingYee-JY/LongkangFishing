@@ -257,7 +257,7 @@ function updateScore(){
                 final.classList.remove("hide")
                 text.innerHTML = `
                 <img src="./img/win.png">
-                <p>Here Your Prize!</p>`;
+                <p>Here's Your Prize!</p>`;
                 clearInterval(scoreinterval);
               }, 200);
         }

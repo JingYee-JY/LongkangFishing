@@ -484,7 +484,7 @@ hr{
       right: 0;
     }
     .tank{
-        bottom: 45px;
+        bottom: -45px;
         width: 200px;
         height: 145px;
     }

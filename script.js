@@ -23,7 +23,7 @@ let border
 let scoreinterval
 
 let startGame = false;
-let player = {step: 1, right:9,}
+let player = {step: 1, right:9}
 let right;
 let total;
 let chance;
@@ -138,11 +138,11 @@ function moveObject(){
         if(item.y >= spwanTime && item.y < (spwanTime + 1) && !item.classList.contains("move")){
             spawnObject();
         }
-        if(item.y >= spwanTime && item.y < (spwanTime + 9) && item.classList.contains("move")){
-            console.log("S")
-            spawnObject();
-        }
         if(item.classList.contains("move")){
+            if(item.y >= spwanTime && item.y < (spwanTime + 9)){
+                console.log("S")
+                spawnObject();
+            }
             if(item.x < 60){
                 if(item.y > border.height - 200){
                     item.classList.remove("move")

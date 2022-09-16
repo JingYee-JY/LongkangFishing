@@ -42,7 +42,7 @@ body{
 .game{
     background-image: url("./img/water.png");
     position: relative;
-    background-size: 60% 100%;
+    background-size: 63% 100%;
     background-position:right;
     background-repeat: no-repeat;
 }
@@ -484,9 +484,9 @@ hr{
       right: 0;
     }
     .tank{
-        bottom: 145px;
+        bottom: 45px;
         width: 200px;
-        height: 45px;
+        height: 145px;
     }
     .game{
         background-size: 65% 100%;

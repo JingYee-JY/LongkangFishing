@@ -35,14 +35,22 @@ body{
     text-align: center;
     min-height: 100vh;
 }
+.game{
 
+    background-size: 100% 100%;
+}
 .start, .final{
     background-image: url("./img/background.png");
     background-size: contain;
 }
 .game{
+    background-image: url("./img/water.png");
     position: relative;
+    background-size: 60% 100%;
+    background-position:right;
+    background-repeat: no-repeat;
 }
+
 
 .final{
     align-items: center;
@@ -325,16 +333,6 @@ hr{
     background-repeat: no-repeat;
 }
 
-.water{
-    width:60%;
-    height:100%;
-    align-self: flex-end;
-    background-image: url("./img/water.png");
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
 .popUp, .ready{
     position: fixed;
     display: flex;
@@ -498,9 +496,8 @@ hr{
         width: 200px;
         height: 145px;
     }
-    .water{
-        background-image: url("./img/waterIpad.png");
-        width: 65%;
+    .game{
+        background-size: 65% 100%;
     }
     .top{
         width: 250px;
@@ -593,9 +590,6 @@ hr{
     }
     .final-title img{
         padding-bottom: 2.5%;
-    }
-    .water{
-        min-width: 300px;
     }
     .icon p{
         margin-bottom: 10px;

@@ -135,7 +135,11 @@ function moveObject(){
     let spwanTime = border.height / 4
 
     function spawnItem(item){
-        if(item.y >= spwanTime && item.y < (spwanTime + 1)){
+        if(item.y >= spwanTime && item.y < (spwanTime + 1) && !item.classList.contains("move")){
+            spawnObject();
+        }
+        if(item.y >= spwanTime && item.y < (spwanTime + 9) && item.classList.contains("move")){
+            console.log("S")
             spawnObject();
         }
         if(item.classList.contains("move")){
@@ -147,8 +151,13 @@ function moveObject(){
                 item.style.top = item.y +"px";
                 return
             }
+            if(item.y > border.height - 300 && item.x > (border.height/2 - 125)){
+                item.classList.remove("move")
+                return
+            }
             if(item.y > border.height - 200){
                 item.classList.remove("move")
+                return
             }
             item.x = item.x - player.right;
             item.style.left = item.x +"px";

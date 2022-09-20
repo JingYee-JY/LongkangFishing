@@ -14,6 +14,7 @@ const finalTitle = document.querySelector(".title-final");
 const text = document.querySelector(".text");
 const more = document.querySelector(".More");
 const restart = document.querySelector(".restart");
+const home = document.querySelector(".home");
 const ready = document.querySelector(".ready");
 const readyButton = document.querySelector(".readyButton");
 const detail = document.querySelector(".detail");
@@ -63,6 +64,14 @@ restart.addEventListener("click", () => {
         objects.pop()
     }
     gameDetail()
+  })
+
+  home.addEventListener("click", () => {
+    final.classList.add("hide")
+    for(let i = 0; i < 3; i++){
+        objects.pop()
+    }
+    start.classList.remove("hide")
   })
 
   function gameDetail(){

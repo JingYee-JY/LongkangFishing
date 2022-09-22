@@ -80,7 +80,7 @@ body{
     justify-content: space-between;
     text-decoration: none;
     border-radius: 10px;
-    padding: 5% 5%;
+    padding: 15px 30px;
     margin-bottom: 15px;
     color: white;
     font-size: 25px;
@@ -348,9 +348,10 @@ hr{
 
 .pop{
     background-color: white;
+    padding: 20px;
     position: relative;
     width: 80%;
-    height: 50%;
+    height: auto;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -382,7 +383,7 @@ hr{
 .detail h1{
     font-weight: 900;
     font-size: 40px;
-    margin-top: 20px !important;
+    /* margin-top: 20px !important; */
     margin: 0;
 }
 
@@ -481,7 +482,7 @@ hr{
       width: 100%;
     }
     .start, .howToPlay, .game,.final, .popUp, .ready{
-        max-width: 600px;
+        /* max-width: 600px; */
         margin: 0 auto;
     }
     .start,.game,.final, .popUp, .ready{
@@ -489,9 +490,10 @@ hr{
       right: 0;
     }
     .tank{
-        bottom: -45px;
+        bottom: -20px;
         width: 200px;
         height: 145px;
+        left:40px;
     }
     .game{
         background-size: 65% 100%;
@@ -500,8 +502,8 @@ hr{
         width: 250px;
     }
     .preview{
-        margin: 150px auto;
-        width: 80%;
+        margin: 80px auto;
+        width: 50%;
     }
     .words{
         font-size: 30px;
@@ -605,10 +607,10 @@ hr{
     }
     .startButton, .startGame,.restart, .home{
         max-width: 250px;
-        padding: 3% 5%;
+        padding: 10px 20px;
     }
     .readyButton, .next{
-        padding: 3%;
+        padding: 10px 20px;
         max-width: 200px;
     }
     .final-title{
@@ -619,3 +621,9 @@ hr{
         height: auto;
     }
 }
+
+@media screen and (max-width:767px){
+    .endTitle {
+      display: none;
+    }
+  }

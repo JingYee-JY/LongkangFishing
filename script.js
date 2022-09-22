@@ -14,7 +14,6 @@ const finalTitle = document.querySelector(".title-final");
 const text = document.querySelector(".text");
 const more = document.querySelector(".More");
 const restart = document.querySelector(".restart");
-const home = document.querySelector(".home");
 const ready = document.querySelector(".ready");
 const readyButton = document.querySelector(".readyButton");
 const detail = document.querySelector(".detail");
@@ -58,15 +57,7 @@ next.addEventListener("click", () => {
     fallingObject()
 })
 
-restart.addEventListener("click", () => {
-    final.classList.add("hide")
-    for(let i = 0; i < 3; i++){
-        objects.pop()
-    }
-    gameDetail()
-  })
-
-  home.addEventListener("click", () => {
+  restart.addEventListener("click", () => {
     final.classList.add("hide")
     for(let i = 0; i < 3; i++){
         objects.pop()
@@ -86,7 +77,7 @@ restart.addEventListener("click", () => {
     }
     chance = 3
     chances.innerHTML = `
-    <p>Chance:</p>
+    <p>Chance</p>
     <img class="net" src="./img/net.png">
     <img class="net" src="./img/net.png">
     <img class="net" src="./img/net.png">`
@@ -96,7 +87,7 @@ restart.addEventListener("click", () => {
     <img src=${objects[answerIndex].image}>`
     scoreCount = document.querySelector(".scoreCount")
     detail.innerHTML =`
-        <h1>Catch</h1>
+        <h1>Tap and catch</h1>
         <p>${total} ${objects[answerIndex].name} fish</p>
         <img src="${objects[answerIndex].image}">`
 }
@@ -193,7 +184,7 @@ function moveObject(){
                     final.classList.remove("hide")
                     text.innerHTML = `
                     <img src="./img/lose.png">
-                    <p>Try Again!</p>`;
+                    <p>Try again!</p>`;
                     clearInterval(scoreinterval);
                     return
                 }
@@ -201,31 +192,31 @@ function moveObject(){
                 net.remove()
                 if(item.classList.contains("blue")){
                     information.innerHTML =`
-                    <h1>Wrong Fish</h1>
+                    <h1>Oops! Caught the wrong fish!</h1>
                     <img src="${objects[0].image}">
                     <p>Look closer!</p>`
                 }
                 if(item.classList.contains("brown")){
                     information.innerHTML =`
-                    <h1>Wrong Fish</h1>
+                    <h1>Oops! Caught the wrong fish!</h1>
                     <img src="${objects[1].image}">
                     <p>Look closer!</p>`
                 }
                 if(item.classList.contains("orange")){
                     information.innerHTML =`
-                    <h1>Wrong Fish</h1>
+                    <h1>Oops! Caught the wrong fish!</h1>
                     <img src="${objects[2].image}">
                     <p>Look closer!</p>`
                 }
                 if(item.classList.contains("green")){
                     information.innerHTML =`
-                    <h1>Wrong Fish</h1>
+                    <h1>Oops! Caught the wrong fish!</h1>
                     <img src="${objects[3].image}">
                     <p>Look closer!</p>`
                 }
                 if(item.classList.contains("red")){
                     information.innerHTML =`
-                    <h1>Wrong Fish</h1>
+                    <h1>Oops! Caught the wrong fish!</h1>
                     <img src="${objects[4].image}">
                     <p>Look closer!</p>`
                 }
@@ -266,7 +257,7 @@ function updateScore(){
                 final.classList.remove("hide")
                 text.innerHTML = `
                 <img src="./img/win.png">
-                <p>Here's Your Prize!</p>`;
+                <p>Here's your prize!</p>`;
                 clearInterval(scoreinterval);
               }, 200);
         }

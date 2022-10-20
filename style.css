@@ -31,7 +31,6 @@ body{
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    height: auto;
     text-align: center;
     min-height: 100vh;
 }
@@ -106,6 +105,28 @@ body{
     margin-right: 6%;
 }
 
+.startButton:active,.startGame:active,.readyButton:active,.next:active,.restart:active,.home:active{
+    animation: animate 0.2s;
+}
+
+@keyframes animate{
+    0%{
+        transform: rotate(0deg) translateX(0px);
+    }
+    25%{
+        transform: rotate(-20deg) translateX(-10px);
+    }
+    50%{
+        transform: rotate(0deg) translateX(0px);
+    }
+    75%{
+        transform: rotate(20deg) translateX(10px);
+    }
+    100%{
+        transform: rotate(0deg) translateX(0px);
+    }
+}
+
 .words{
     font-size: 20px;
     width: 100%;
@@ -175,8 +196,8 @@ hr{
 
 
 .game-container{
-    position: absolute;
     width: 100%;
+    position: absolute;
     display: flex;
     justify-content: flex-end;
     height: 100%;
@@ -213,7 +234,6 @@ hr{
 	border-radius: 20px;
 	font-size: 20px;
 	width: 150px;
-    height: 150px;
     top: 5px;
     flex-direction: column;
     align-items: center;
@@ -282,13 +302,13 @@ hr{
     background-repeat: no-repeat;
 }
 
-.brown{
+.white{
     width: 100px;
     height: 100px;
     border-radius: 5px;
     position: absolute;
     display: flex;
-    background-image: url("./img/brown.png");
+    background-image: url("./img/white.png");
     background-size: contain;
     justify-content: center;
     background-repeat: no-repeat;
@@ -344,6 +364,14 @@ hr{
     z-index: 9;
     top: 0;
     background-color: transparent;
+}
+
+.ready{
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.number{
+    font-size: 30px;
 }
 
 .pop{
@@ -509,6 +537,9 @@ hr{
         font-size: 30px;
         width: 90%;
     }
+    .number{
+        font-size: 40px;
+    }
     .arrowHead{
         max-width: 20px;
     }
@@ -519,7 +550,7 @@ hr{
         max-width: 400px;
         max-height: 400px;
     }
-    .blue, .brown,.red,.orange,.green{
+    .blue, .white,.red,.orange,.green{
         margin-left: 40px;
         height: 160px;
         width: 160px;

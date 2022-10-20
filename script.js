@@ -5,6 +5,7 @@ const startGameButton = document.querySelector(".startGame")
 const game = document.querySelector(".game")
 const gameContainer = document.querySelector(".game-container");
 const goal = document.querySelector(".goal")
+const number = document.querySelector(".number")
 const chances = document.querySelector(".chance")
 const popUp = document.querySelector(".popUp");
 const information = document.querySelector(".information");
@@ -17,10 +18,17 @@ const restart = document.querySelector(".restart");
 const ready = document.querySelector(".ready");
 const readyButton = document.querySelector(".readyButton");
 const detail = document.querySelector(".detail");
+const homeButton = document.querySelector(".home")
+
+const clickSound = document.getElementById("click")
+const clap = document.getElementById("clap")
+const lose = document.getElementById("lose")
 
 let scoreCount
+let score
 let border
 let scoreinterval
+let distance
 
 let startGame = false;
 let player = {step: 1, right:9}
@@ -28,22 +36,33 @@ let right;
 let total;
 let chance;
 
+let newBorderWidth
+let offset
+let yDistance
+let catching
+
 var objects = [ {name: "blue",image: "./img/blue1.png"},
-                {name: "brown",image: "./img/brown1.png"},
+                {name: "white",image: "./img/white1.png"},
                 {name: "orange",image: "./img/orange1.png"},
                 {name: "green",image: "./img/green1.png"},
                 {name: "red",image: "./img/red1.png"}]
 
 startButton.addEventListener("click", () => {
-    start.classList.add("hide")
-    gameDetail()
-    //howToPlay.classList.remove("hide")
+    playClickSound()
+    let delay = setTimeout(() => {
+        start.classList.add("hide")
+        gameDetail()
+        //howToPlay.classList.remove("hide")
+    }, 200);
 })
 
 readyButton.addEventListener("click", () => {
-    start.classList.add("hide")
-    began()
-    //howToPlay.classList.remove("hide")
+    playClickSound()
+    let delay = setTimeout(() => {
+        start.classList.add("hide")
+        began()
+        //howToPlay.classList.remove("hide")
+    }, 200);
 })
 
 /*startGameButton.addEventListener("click", () => {
@@ -52,18 +71,31 @@ readyButton.addEventListener("click", () => {
 })*/
 
 next.addEventListener("click", () => {
-    popUp.classList.add("hide")
-    startGame = true
-    fallingObject()
+    playClickSound()
+    let delay = setTimeout(() => {
+        popUp.classList.add("hide")
+        startGame = true
+        fallingObject()
+    }, 200);
 })
 
   restart.addEventListener("click", () => {
-    final.classList.add("hide")
-    for(let i = 0; i < 3; i++){
-        objects.pop()
-    }
-    start.classList.remove("hide")
+    playClickSound()
+    let delay = setTimeout(() => {
+        final.classList.add("hide")
+        for(let i = 0; i < 3; i++){
+            objects.pop()
+        }
+        start.classList.remove("hide")
+    }, 200);
   })
+
+  homeButton.addEventListener("click", () => {
+    playClickSound()
+    let delay = setTimeout(() => {
+      location.assign('https://gimme.sg/activations/dementia/');
+    }, 200);
+})
 
   function gameDetail(){
     game.classList.remove("hide")
@@ -75,6 +107,7 @@ next.addEventListener("click", () => {
     for(let i = 0; i < 3; i++){
         objects.push(newobject)
     }
+    score = 0
     chance = 3
     chances.innerHTML = `
     <p>Chance</p>
@@ -90,6 +123,7 @@ next.addEventListener("click", () => {
         <h1>Tap and catch</h1>
         <p>${total} ${objects[answerIndex].name} fish</p>
         <img src="${objects[answerIndex].image}">`
+    number.innerHTML = `${score}`
 }
 
 function began(){
@@ -97,6 +131,7 @@ function began(){
     startGame = true
     scoreinterval =  setInterval(updateScore, 1)
     chance = 3
+    first = true
     spawnObject()
     fallingObject()
 }
@@ -109,13 +144,33 @@ function spawnObject(){
     console.log(objects.length)
     console.log(border.width)
     object.classList.add(objects[index].name)
-    object.y = 0;
+    if(border.width < 500){
+        object.y = -300
+        newBorderWidth = border.width - 240
+        offset = 145
+        yDistance = 150
+        player.step = 2
+        player.right = 9
+    }
+    if(border.width > 500){
+        object.y = -350
+        newBorderWidth = border.width - 550
+        offset = 300
+        player.step = 4
+        player.right = 11
+        yDistance = 300
+    }
+    if(first == true){
+        object.y = -151;
+        first = false
+    }
     object.style.top = object.y + 'px';
-    object.x = Math.floor(Math.random() * ((border.width - 120) - 150)) + 150
+    object.x = Math.floor(Math.random() * newBorderWidth) + offset
     object.style.left = object.x + 'px';
     gameContainer.appendChild(object);
     object.addEventListener("click", () => {
-    object.classList.add("move")
+        playClickSound()
+        object.classList.add("move")
     })
 }
 
@@ -127,22 +182,16 @@ function fallingObject(){
 }
 function moveObject(){
     let blue = document.querySelectorAll(".blue");
-    let brown = document.querySelectorAll(".brown");
+    let white = document.querySelectorAll(".white");
     let orange = document.querySelectorAll(".orange");
     let green = document.querySelectorAll(".green");
     let red = document.querySelectorAll(".red");
 
-    let spwanTime = border.height / 4
-
     function spawnItem(item){
-        if(item.y >= spwanTime && item.y < (spwanTime + 1) && !item.classList.contains("move")){
+        if(item.y >= -150 && item.y < (-150 + player.step)){
             spawnObject();
         }
         if(item.classList.contains("move")){
-            if(item.y >= spwanTime && item.y < (spwanTime + 9)){
-                console.log("S")
-                spawnObject();
-            }
             if(item.x < 60){
                 if(item.y > border.height - 200){
                     item.classList.remove("move")
@@ -167,10 +216,10 @@ function moveObject(){
         if(item.y > border.height){
             gameContainer.removeChild(item);
         }
-        if(item.y > (border.height - 150) && item.y < border.height && 
+        if(item.y > (border.height - yDistance) && item.y < border.height && 
         item.x > 0 && item.x < 100){
             if(item.classList.contains(`${answer}`)){
-                total -= 1
+                score += 1
                 gameContainer.removeChild(item);
                 return
             }
@@ -180,6 +229,8 @@ function moveObject(){
                 if(chance == 0){
                     startGame = false
                     remove()
+                    lose.currentTime = 0
+                    lose.play()
                     game.classList.add("hide")
                     final.classList.remove("hide")
                     text.innerHTML = `
@@ -196,7 +247,7 @@ function moveObject(){
                     <img src="${objects[0].image}">
                     <p>Look closer!</p>`
                 }
-                if(item.classList.contains("brown")){
+                if(item.classList.contains("white")){
                     information.innerHTML =`
                     <h1>Oops! Caught the wrong fish!</h1>
                     <img src="${objects[1].image}">
@@ -230,7 +281,7 @@ function moveObject(){
     blue.forEach(function(item){
         spawnItem(item);
     })
-    brown.forEach(function(item){
+    white.forEach(function(item){
         spawnItem(item);
     }) 
     orange.forEach(function(item){
@@ -246,11 +297,13 @@ function moveObject(){
 
 function updateScore(){
     if(startGame == true){
-        scoreCount.innerHTML = `${total}`;
+        number.innerHTML = `${score}`;
 
-        if(total == 0){
+        if(score == total){
             console.log("stop")
             let delay = setTimeout(() => {
+                clap.currentTime = 0
+                clap.play()
                 startGame = false
                 remove()
                 game.classList.add("hide")
@@ -266,7 +319,7 @@ function updateScore(){
 
 function remove(){
     let blue = document.querySelectorAll(".blue");
-    let brown = document.querySelectorAll(".brown");
+    let white = document.querySelectorAll(".white");
     let orange = document.querySelectorAll(".orange");
     let green = document.querySelectorAll(".green");
     let red = document.querySelectorAll(".red");
@@ -274,7 +327,7 @@ function remove(){
     blue.forEach(function(item){
         gameContainer.removeChild(item);
     })
-    brown.forEach(function(item){
+    white.forEach(function(item){
         gameContainer.removeChild(item);
     })
     orange.forEach(function(item){
@@ -287,3 +340,14 @@ function remove(){
         gameContainer.removeChild(item);
     })
 }
+
+function playClickSound(){
+    console.log(clickSound)
+    clickSound.currentTime = 0
+    clickSound.play()
+}
+
+/*prevent double tag zoom*/
+document.addEventListener('dblclick', function(event) {
+event.preventDefault();
+}, { passive: false });

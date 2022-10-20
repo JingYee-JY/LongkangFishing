@@ -63,7 +63,9 @@
         <div class="game-container">
             <div class="water"></div>
             <div class="end-line"></div>
-            <div class="tank"></div>
+            <div class="tank">
+                <p class="number">0</p>
+            </div>
         </div>
     </div>
     <div class="popUp hide">
@@ -80,10 +82,15 @@
         <button class="restart">
             <p class="words"><img src="./img/again.png" class="arrowHead">Play again</p>
         </button>
-        <button class="home" onclick="window.location.href='https://gimme.sg/activations/dementia/';">
+        <button class="home">
             <p class="words"><img src="./img/home.png" class="arrowHead">Back to home</p>
         </button>
     </div>
+
+    <audio id="click" src="sound/click.wav"></audio>
+    <audio id="clap" src="./sound/clap.wav"></audio>
+    <audio id="lose" src="./sound/lose.wav"></audio>
+
     <script src="script.js"></script>
 </body>
 </html>
